@@ -72,12 +72,37 @@ The project aims to provide a lightweight collaborative IDE experience inspired 
 - Create rooms
 - Join existing rooms
 - Password-protected room workflow (local implementation)
+                   ┌────────────────────┐
+                   │      Frontend      │
+                   │      React + TS    │
+                   └─────────┬──────────┘
+                             │
+                             │ Socket.IO
+                             │
+                   ┌─────────▼──────────┐
+                   │      FastAPI       │
+                   │     Backend        │
+                   └─────────┬──────────┘
+                             │
+        ┌────────────────────┼────────────────────┐
+        │                    │                    │
+        │                    │                    │
+        ▼                    ▼                    ▼
+ Code Synchronization   Chat Service      Notes Service
+
+                             │
+                             ▼
+
+                     Gemini AI Service
+
+                             │
+                             ▼
+
+                     Code Execution Engine
 
 ---
 
 # 🏗️ Architecture
-
-text                    ┌────────────────────┐                    │      Frontend      │                    │      React + TS    │                    └─────────┬──────────┘                              │                              │ Socket.IO                              │                    ┌─────────▼──────────┐                    │      FastAPI       │                    │     Backend        │                    └─────────┬──────────┘                              │         ┌────────────────────┼────────────────────┐         │                    │                    │         │                    │                    │         ▼                    ▼                    ▼  Code Synchronization   Chat Service      Notes Service                               │                              ▼                       Gemini AI Service                               │                              ▼                       Code Execution Engine 
 
 ---
 
@@ -152,7 +177,25 @@ text [PASTE YOUTUBE LINK HERE]
 
 # 📂 Project Structure
 
-text CollabCode │ ├── backend │   ├── server.py │   ├── requirements.txt │   ├── .env.example │ ├── frontend │   ├── src │   ├── public │   ├── package.json │ ├── screenshots │ ├── docs │ ├── README.md │ └── .gitignore 
+CollabCode
+│
+├── backend
+│   ├── server.py
+│   ├── requirements.txt
+│   ├── .env.example
+│
+├── frontend
+│   ├── src
+│   ├── public
+│   ├── package.json
+│
+├── screenshots
+│
+├── docs
+│
+├── README.md
+│
+└── .gitignore
 
 ---
 
