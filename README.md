@@ -78,7 +78,6 @@ The project aims to provide a lightweight collaborative IDE experience inspired 
 
 # 🏗️ Architecture
 
-![img](https://github.com/aditya20051004/CollabCode/blob/main/colab_image/arch.png)
 
 
 ```mermaid
@@ -102,6 +101,11 @@ graph TD
     B --> C["🤖 Gemini API"]
     B --> D["🗄️ MongoDB (Future)"]
 ```
+---
+
+## Architecture in Visuals
+![img](https://github.com/aditya20051004/CollabCode/blob/main/colab_image/arch.png)
+
 ---
 
 # 🛠️ Tech Stack
