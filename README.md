@@ -78,35 +78,27 @@ The project aims to provide a lightweight collaborative IDE experience inspired 
 
 # 🏗️ Architecture
 
-'''
-┌─────────────────────────────┐
-│        React Frontend       │
-│                             │
-│  Monaco Editor              │
-│  Chat Panel                 │
-│  Shared Notes               │
-│  AI Assistant               │
-│  File Explorer              │
-└──────────────┬──────────────┘
-               │
-               │ Socket.IO
-               │
-┌──────────────▼──────────────┐
-│       FastAPI Backend       │
-│                             │
-│  Room Management            │
-│  WebSocket Server           │
-│  Code Execution Engine      │
-│  AI API Integration         │
-└───────┬─────────┬───────────┘
-        │         │
-        │         │
-        ▼         ▼
-┌─────────────┐   ┌─────────────┐
-│ Gemini API │   │ MongoDB     │
-│             │   │ (Future)    │
-└─────────────┘   └─────────────┘
-'''
+```mermaid
+graph TD
+    A["🖥️ React Frontend"]
+    A1["Monaco Editor"]
+    A2["Chat Panel"]
+    A3["Shared Notes"]
+    A4["AI Assistant"]
+    A5["File Explorer"]
+
+    A --> A1 & A2 & A3 & A4 & A5
+
+    A -->|"Socket.IO"| B["⚙️ FastAPI Backend"]
+
+    B --> B1["Room Management"]
+    B --> B2["WebSocket Server"]
+    B --> B3["Code Execution Engine"]
+    B --> B4["AI API Integration"]
+
+    B --> C["🤖 Gemini API"]
+    B --> D["🗄️ MongoDB (Future)"]
+```
 ---
 
 # 🛠️ Tech Stack
