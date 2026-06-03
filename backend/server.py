@@ -1,6 +1,8 @@
+import code
 from urllib import response
 
 from click import prompt
+from mongo import rooms_collection
 
 import socketio
 from fastapi import FastAPI
@@ -40,13 +42,28 @@ class AIRequest(BaseModel):
 #     code: str
 
 
+# def ensure_room(room):
+#     if room not in room_data:
+#         room_data[room] = {
+#             "code": "",
+#             "notes": "",
+#             "chat": []
+#         }
+
 def ensure_room(room):
-    if room not in room_data:
-        room_data[room] = {
+
+    existing = rooms_collection.find_one(
+        {"roomId": room}
+    )
+
+    if not existing:
+
+        rooms_collection.insert_one({
+            "roomId": room,
             "code": "",
             "notes": "",
             "chat": []
-        }
+        })
 
 # =========================
 # In-Memory Storage
@@ -168,6 +185,8 @@ async def join_room(sid, room):
     if room not in room_users:
         room_users[room] = []
 
+        
+
     if username and username not in room_users[room]:
         room_users[room].append(username)
 
@@ -185,12 +204,42 @@ async def join_room(sid, room):
     room=room
 )
 
-    if room in room_data:
-        await sio.emit(
-            "room_state",
-            room_data[room],
-            to=sid
-        )
+    # if room in room_data:
+    #     await sio.emit(
+    #         "room_state",
+    #         room_data[room],
+    #         to=sid
+    #     )
+    
+
+    ensure_room(room)
+
+    room_doc = rooms_collection.find_one(
+    {"roomId": room}
+
+    
+)
+     
+    if room not in room_files:
+
+     room_files[room] = [
+        {
+            "id": "1",
+            "name": "main.py",
+            "content": room_doc["code"]
+        }
+    ]
+
+    await sio.emit(
+    "room_state",
+    {
+        "code": room_doc["code"],
+        "notes": room_doc["notes"],
+        "chat": room_doc["chat"],
+        "files": room_files.get(room, [])
+    },
+    to=sid
+)
 
     print("ROOM USERS =", room_users)
     print(f"{sid} joined {room}")
@@ -211,8 +260,18 @@ async def code_change(sid, code):
             "chat": []
         }
 
-    room_data[room]["code"] = code
+    # room_data[room]["code"] = code
+    # ensure_room(room)
     ensure_room(room)
+    print("SAVING CODE:", code)
+    rooms_collection.update_one(
+    {"roomId": room},
+    {
+        "$set": {
+            "code": code
+        }
+    }
+)
 
     await sio.emit(
         "code_update",
@@ -236,8 +295,18 @@ async def notes_change(sid, notes):
             "chat": []
         }
 
+    # ensure_room(room)
+    # room_data[room]["notes"] = notes
     ensure_room(room)
-    room_data[room]["notes"] = notes
+
+    rooms_collection.update_one(
+    {"roomId": room},
+    {
+        "$set": {
+            "notes": notes
+        }
+    }
+)
 
     await sio.emit(
         "notes_update",
@@ -254,8 +323,18 @@ async def send_message(sid, data):
     if not room:
         return
 
+    # ensure_room(room)
+    # room_data[room]["chat"].append(data)
     ensure_room(room)
-    room_data[room]["chat"].append(data)
+
+    rooms_collection.update_one(
+    {"roomId": room},
+    {
+        "$push": {
+            "chat": data
+        }
+    }
+)
 
     print("MESSAGE RECEIVED:", data)
 

@@ -364,15 +364,39 @@ useEffect(() => {
     };
 
     socket.on("code_update", handleCodeUpdate);
+//     socket.on(
+//   "room_state",
+//   (data) => {
+
+//     setCode(data.code);
+
+//     setNotes(data.notes);
+
+//     setMessages(data.chat);
+//   }
+// );
     socket.on(
   "room_state",
   (data) => {
 
-    setCode(data.code);
-
     setNotes(data.notes);
 
     setMessages(data.chat);
+
+    if (data.files) {
+
+      setFiles(data.files);
+
+      if (data.files.length > 0) {
+
+        setActiveFileId(
+          data.files[0].id
+        );
+
+      }
+
+    }
+
   }
 );
 
@@ -864,8 +888,7 @@ onToggleAI={() =>
 //   );
 
 // }}
-
-            onChange={(value) => {
+onChange={(value) => {
 
   const updatedCode =
     value || "";
@@ -892,7 +915,41 @@ onToggleAI={() =>
     }
   );
 
+  socket.emit(
+    "code_change",
+    updatedCode
+  );
+
 }}
+
+//             onChange={(value) => {
+
+//   const updatedCode =
+//     value || "";
+
+//   setFiles(
+//     prev =>
+//       prev.map((file) =>
+//         file.id === activeFileId
+//           ? {
+//               ...file,
+//               content:
+//                 updatedCode,
+//             }
+//           : file
+//       )
+//   );
+
+//   socket.emit(
+//     "update_file",
+//     {
+//       id: activeFileId,
+//       content:
+//         updatedCode,
+//     }
+//   );
+
+// }}
       />
     </div>
 
