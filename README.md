@@ -78,6 +78,7 @@ The project aims to provide a lightweight collaborative IDE experience inspired 
 
 # 🏗️ Architecture
 
+'''
 ┌─────────────────────────────┐
 │        React Frontend       │
 │                             │
@@ -101,12 +102,11 @@ The project aims to provide a lightweight collaborative IDE experience inspired 
         │         │
         │         │
         ▼         ▼
-
 ┌─────────────┐   ┌─────────────┐
 │ Gemini API │   │ MongoDB     │
 │             │   │ (Future)    │
 └─────────────┘   └─────────────┘
-
+'''
 ---
 
 # 🛠️ Tech Stack
@@ -179,7 +179,7 @@ text [PASTE YOUTUBE LINK HERE]
 ---
 
 # 📂 Project Structure
-
+'''
 CollabCode/
 │
 ├── frontend/
@@ -216,6 +216,7 @@ CollabCode/
 │
 ├── README.md
 └── .gitignore
+'''
 ---
 
 # ⚙️ Installation Guide
