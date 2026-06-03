@@ -72,37 +72,40 @@ The project aims to provide a lightweight collaborative IDE experience inspired 
 - Create rooms
 - Join existing rooms
 - Password-protected room workflow (local implementation)
-                   ┌────────────────────┐
-                   │      Frontend      │
-                   │      React + TS    │
-                   └─────────┬──────────┘
-                             │
-                             │ Socket.IO
-                             │
-                   ┌─────────▼──────────┐
-                   │      FastAPI       │
-                   │     Backend        │
-                   └─────────┬──────────┘
-                             │
-        ┌────────────────────┼────────────────────┐
-        │                    │                    │
-        │                    │                    │
-        ▼                    ▼                    ▼
- Code Synchronization   Chat Service      Notes Service
-
-                             │
-                             ▼
-
-                     Gemini AI Service
-
-                             │
-                             ▼
-
-                     Code Execution Engine
+                 
 
 ---
 
 # 🏗️ Architecture
+
+┌─────────────────────────────┐
+│        React Frontend       │
+│                             │
+│  Monaco Editor              │
+│  Chat Panel                 │
+│  Shared Notes               │
+│  AI Assistant               │
+│  File Explorer              │
+└──────────────┬──────────────┘
+               │
+               │ Socket.IO
+               │
+┌──────────────▼──────────────┐
+│       FastAPI Backend       │
+│                             │
+│  Room Management            │
+│  WebSocket Server           │
+│  Code Execution Engine      │
+│  AI API Integration         │
+└───────┬─────────┬───────────┘
+        │         │
+        │         │
+        ▼         ▼
+
+┌─────────────┐   ┌─────────────┐
+│ Gemini API │   │ MongoDB     │
+│             │   │ (Future)    │
+└─────────────┘   └─────────────┘
 
 ---
 
@@ -177,26 +180,42 @@ text [PASTE YOUTUBE LINK HERE]
 
 # 📂 Project Structure
 
-CollabCode
+CollabCode/
 │
-├── backend
+├── frontend/
+│   │
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Navbar.tsx
+│   │   │   ├── Sidebar.tsx
+│   │   │   ├── ChatPanel.tsx
+│   │   │   └── ...
+│   │   │
+│   │   ├── App.tsx
+│   │   ├── socket.ts
+│   │   └── main.tsx
+│   │
+│   ├── package.json
+│   └── vite.config.ts
+│
+├── backend/
+│   │
 │   ├── server.py
 │   ├── requirements.txt
 │   ├── .env.example
+│   └── mongo.py
 │
-├── frontend
-│   ├── src
-│   ├── public
-│   ├── package.json
+├── screenshots/
+│   ├── homepage.png
+│   ├── editor.png
+│   ├── collaboration.png
+│   └── ai-assistant.png
 │
-├── screenshots
-│
-├── docs
+├── docs/
+│   └── report.pdf
 │
 ├── README.md
-│
 └── .gitignore
-
 ---
 
 # ⚙️ Installation Guide
