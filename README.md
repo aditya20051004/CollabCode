@@ -78,6 +78,9 @@ The project aims to provide a lightweight collaborative IDE experience inspired 
 
 # 🏗️ Architecture
 
+![img](https://github.com/aditya20051004/CollabCode/blob/main/colab_image/arch.png)
+
+
 ```mermaid
 graph TD
     A["🖥️ React Frontend"]
@@ -140,75 +143,43 @@ graph TD
 
 ## Home Page
 
-[PLACE SCREENSHOT HERE]
+![img](https://github.com/aditya20051004/CollabCode/blob/main/colab_image/intro.png)
 
 ---
 
-## Collaborative Editor
 
-[PLACE SCREENSHOT HERE]
+## Chat + Active Editors
 
----
+![img](https://github.com/aditya20051004/CollabCode/blob/main/colab_image/inter.png)
+![img](https://github.com/aditya20051004/CollabCode/blob/main/colab_image/inter2.png)
 
-## Chat + Notes + Active Editors
-
-[PLACE SCREENSHOT HERE]
 
 ---
 
 ## AI Assistant
 
-[PLACE SCREENSHOT HERE]
+![img](https://github.com/aditya20051004/CollabCode/blob/main/colab_image/ai.png)
+
 
 ---
 
-# 🎥 Demo Video
+## Collaborative Editor
 
-Demo Link:
+![img](https://github.com/aditya20051004/CollabCode/blob/main/colab_image/collab.png)
 
-text [PASTE YOUTUBE LINK HERE] 
+---
+
+# 🎥 Demo Live
+
+Demo Link: (SOON....)
+
+
 
 ---
 
 # 📂 Project Structure
-'''
-CollabCode/
-│
-├── frontend/
-│   │
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Navbar.tsx
-│   │   │   ├── Sidebar.tsx
-│   │   │   ├── ChatPanel.tsx
-│   │   │   └── ...
-│   │   │
-│   │   ├── App.tsx
-│   │   ├── socket.ts
-│   │   └── main.tsx
-│   │
-│   ├── package.json
-│   └── vite.config.ts
-│
-├── backend/
-│   │
-│   ├── server.py
-│   ├── requirements.txt
-│   ├── .env.example
-│   └── mongo.py
-│
-├── screenshots/
-│   ├── homepage.png
-│   ├── editor.png
-│   ├── collaboration.png
-│   └── ai-assistant.png
-│
-├── docs/
-│   └── report.pdf
-│
-├── README.md
-└── .gitignore
-'''
+![img](https://github.com/aditya20051004/CollabCode/blob/main/colab_image/str.png)
+
 ---
 
 # ⚙️ Installation Guide
